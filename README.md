@@ -4,9 +4,9 @@
 
 
 Mini-Product Backlog
-[ ] Cadastrar Pessoa
-[ ] Criar Pontuações
-[ ] Fazer Chamada
+-[ ] Cadastrar Pessoa
+-[ ] Criar Pontuações
+-[ ] Fazer Chamada
 
 
 To Do

@@ -4,10 +4,10 @@
 
 
 Mini-Product Backlog
-- [ ] Cadastrar Pessoa
-- [ ] Criar Pontuações
-- [ ] Fazer Chamada
-- [ ] Relatório de Pontuações
+- [ ] Cadastrar Pessoa 11/09
+- [ ] Criar Pontuações 18/09
+- [ ] Fazer Chamada 25/09
+- [ ] Relatório de Pontuações 02/10
 
 
 To Do

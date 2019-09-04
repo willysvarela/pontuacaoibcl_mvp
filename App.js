@@ -40,7 +40,7 @@ const App = () => {
           <Button>
             <Text>Chamadas</Text>
           </Button>
-          <Button> 
+          <Button>
             <Text>Relatórios</Text>
           </Button>
         </FooterTab>

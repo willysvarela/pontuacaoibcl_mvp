@@ -7,6 +7,7 @@ Mini-Product Backlog
 - [ ] Cadastrar Pessoa
 - [ ] Criar Pontuações
 - [ ] Fazer Chamada
+- [ ] Relatório de Pontuações
 
 
 To Do

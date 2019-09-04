@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -6,7 +7,7 @@
  * @flow
  */
 
-import React from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import {
   Container,
   Header,
@@ -19,8 +20,24 @@ import {
   Button,
   Text,
 } from 'native-base';
+const Realm = require('realm');
+
 
 const App = () => {
+  const [realm, setRealm] = useState(null);
+  useEffect(() => {
+    return () => {
+      Realm.open({
+        schema: [{ name: 'Dog', properties: { name: 'string' } }]
+      }).then(res => {
+        realm.write(() => {
+          realm.create('Dog', { name: 'Rex' });
+        });
+        setRealm(realm);
+      });
+    };
+  });
+  const info = realm ? 'Quantidade de Dogs: ' + realm : 'Carregando';
   return (
     <Container>
       <Header>
@@ -30,7 +47,7 @@ const App = () => {
         <Right />
       </Header>
       <Content>
-        <Text>Olá</Text>
+        <Text>{info}</Text>
       </Content>
       <Footer>
         <FooterTab>
@@ -48,5 +65,4 @@ const App = () => {
     </Container>
   );
 };
-
 export default App;

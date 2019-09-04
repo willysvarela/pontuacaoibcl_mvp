@@ -6,19 +6,46 @@
  * @flow
  */
 
-import React, {Fragment} from 'react';
-import {SafeAreaView, View, Text, StatusBar} from 'react-native';
+import React from 'react';
+import {
+  Container,
+  Header,
+  Title,
+  Content,
+  Footer,
+  FooterTab,
+  Right,
+  Body,
+  Button,
+  Text,
+} from 'native-base';
 
 const App = () => {
   return (
-    <Fragment>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <View>
-          <Text>First Screen</Text>
-        </View>
-      </SafeAreaView>
-    </Fragment>
+    <Container>
+      <Header>
+        <Body>
+          <Title>PontoApp IBCL</Title>
+        </Body>
+        <Right />
+      </Header>
+      <Content>
+        <Text>Olá</Text>
+      </Content>
+      <Footer>
+        <FooterTab>
+          <Button active>
+            <Text>Pessoas</Text>
+          </Button>
+          <Button>
+            <Text>Chamadas</Text>
+          </Button>
+          <Button> 
+            <Text>Relatórios</Text>
+          </Button>
+        </FooterTab>
+      </Footer>
+    </Container>
   );
 };
 

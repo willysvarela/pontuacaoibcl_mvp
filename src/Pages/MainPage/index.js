@@ -4,7 +4,7 @@ const MainPage = () => {
     return (
         <Container>
             <Header>
-                <Text>PontuApp</Text>
+                <Text>Main Page</Text>
             </Header>
         </Container>
     )

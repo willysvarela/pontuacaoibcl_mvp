@@ -1,11 +1,11 @@
 export default class PersonPoints {
-  static PersonPoints = {
+  static schema = {
     name: 'PersonPoints',
     properties: {
       person: 'Person',
       pointParameter: 'Point',
-      points: 'double[]',
-      date: 'Date',
-    },
+      value: 'double',
+      date: 'Date'
+    }
   };
 }

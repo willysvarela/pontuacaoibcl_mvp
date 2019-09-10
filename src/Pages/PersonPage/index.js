@@ -7,7 +7,8 @@
  * @flow
  */
 
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import commonColor from 'native-base/src/theme/variables/commonColor'
 import {
     Container,
     Header,
@@ -22,10 +23,11 @@ import {
 } from 'native-base';
 
 import PersonSchema from '../../schemas/PersonSchema';
+import { FlatList } from 'react-native-gesture-handler';
 
 const Realm = require('realm');
 
-const PersonPage = () => {
+const PersonPage = (props) => {
     const [persons, setPersons] = useState([]);
 
     useEffect(() => {
@@ -50,7 +52,7 @@ const PersonPage = () => {
             realm.create('Person', person, 'modified');
         });
         const data = realm.objects('Person');
-        setPersons(data);
+        setPersons(data); 
     }
 
     async function handleAddPerson() {
@@ -61,31 +63,35 @@ const PersonPage = () => {
 
     const info = persons ? 'Quantidade de Dogs: ' + persons.length : 'Carregando';
     return (
-        <Container>
-            <Header>
-                <Body>
-                    <Title>PontoApp IBCL</Title>
-                </Body>
-                <Right />
-            </Header>
-            <Content>
-                <Text>{info}</Text>
-                <Button onPress={handleAddPerson}><Text>Add</Text></Button>
-            </Content>
-            <Footer>
-                <FooterTab>
-                    <Button active>
-                        <Text>Pessoas</Text>
-                    </Button>
-                    <Button>
-                        <Text>Chamadas</Text>
-                    </Button>
-                    <Button>
-                        <Text>Relatórios</Text>
-                    </Button>
-                </FooterTab>
-            </Footer>
-        </Container>
+      <Container>
+        <Header>
+          <Body>
+            <Title>PontoApp IBCL</Title>
+          </Body>
+          <Right />
+        </Header>
+        <Content style={{backgroundColor: '#ccc'}}>
+            <Container style={{backgroundColor: commonColor.brandPrimary, height: 40}} />
+            <Container style={{width: '90%', align: 'center', backgroundColor: "#fff", marginTop: -40}}> 
+                <FlatList>  
+
+                </FlatList>
+            </Container>
+        </Content> 
+        <Footer>
+          <FooterTab>
+            <Button active>
+              <Text>Pessoas</Text>
+            </Button>
+            <Button onPress={() => props.navigation.goBack()}>
+              <Text>Chamadas</Text>
+            </Button>
+            <Button>
+              <Text>Relatórios</Text>
+            </Button>
+          </FooterTab>
+        </Footer>
+      </Container>
     );
 };
 export default PersonPage;

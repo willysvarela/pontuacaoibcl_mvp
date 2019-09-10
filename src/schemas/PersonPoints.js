@@ -5,7 +5,7 @@ export default class PersonPoints {
       person: 'Person',
       pointParameter: 'Point',
       value: 'double',
-      date: 'Date'
-    }
+      date: 'Date',
+    },
   };
 }

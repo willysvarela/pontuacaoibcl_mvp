@@ -3,7 +3,7 @@ export default class PersonSchema {
     name: 'Person',
     primaryKey: 'id',
     properties: {
-      id: { type: 'int', indexed: true },
+      id: {type: 'int', indexed: true},
       name: 'string',
     },
   };

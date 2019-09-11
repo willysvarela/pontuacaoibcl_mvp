@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable react-native/no-inline-styles */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -7,91 +7,122 @@
  * @flow
  */
 
-import React, { useState, useEffect } from 'react';
-import commonColor from 'native-base/src/theme/variables/commonColor'
+import React, {useState, useEffect} from 'react';
+import commonColor from 'native-base/src/theme/variables/commonColor';
 import {
-    Container,
-    Header,
-    Title,
-    Content,
-    Footer,
-    FooterTab,
-    Right,
-    Body,
-    Button,
-    Text,
+  Container,
+  Header,
+  Title,
+  Content,
+  Footer,
+  FooterTab,
+  Left,
+  Right,
+  Body,
+  Button,
+  Text,
+  List,
+  ListItem,
+  Fab,
+  Icon,
 } from 'native-base';
-
+import {View} from 'react-native';
 import PersonSchema from '../../schemas/PersonSchema';
-import { FlatList } from 'react-native-gesture-handler';
+import {FlatList} from 'react-native-gesture-handler';
 
 const Realm = require('realm');
 
-const PersonPage = (props) => {
-    const [persons, setPersons] = useState([]);
+const PersonPage = props => {
+  const [persons, setPersons] = useState([]);
 
-    useEffect(() => {
-        async function loadPersons() {
-            const realm = await getRealm();
-            const data = realm.objects('Person');
-            setPersons(data);
-        }
-        loadPersons();
-    }, []);
-
-    const getRealm = () => {
-        return Realm.open({
-            schema: [PersonSchema]
-        });
+  useEffect(() => {
+    async function loadPersons() {
+      const realm = await getRealm();
+      const data = realm.objects('Person');
+      setPersons(data);
     }
+    loadPersons();
+  }, []);
 
-    const savePerson = async (person) => {
-        const realm = await getRealm();
+  const getRealm = () => {
+    return Realm.open({
+      schema: [PersonSchema],
+    });
+  };
 
-        realm.write(() => {
-            realm.create('Person', person, 'modified');
-        });
-        const data = realm.objects('Person');
-        setPersons(data); 
-    }
+  const savePerson = async person => {
+    const realm = await getRealm();
 
-    async function handleAddPerson() {
+    realm.write(() => {
+      realm.create('Person', person, 'modified');
+    });
+    const data = realm.objects('Person');
+    setPersons(data);
+  };
 
-        await savePerson({ id: 4, name: 'Willys' });
-    }
+  async function handleAddPerson() {
+    await savePerson({id: 4, name: 'Willys'});
+  }
 
-
-    const info = persons ? 'Quantidade de Dogs: ' + persons.length : 'Carregando';
+  const renderPersonItem = person => {
     return (
-      <Container>
-        <Header>
-          <Body>
-            <Title>PontoApp IBCL</Title>
-          </Body>
-          <Right />
-        </Header>
-        <Content style={{backgroundColor: '#ccc'}}>
-            <Container style={{backgroundColor: commonColor.brandPrimary, height: 40}} />
-            <Container style={{width: '90%', align: 'center', backgroundColor: "#fff", marginTop: -40}}> 
-                <FlatList>  
-
-                </FlatList>
-            </Container>
-        </Content> 
-        <Footer>
-          <FooterTab>
-            <Button active>
-              <Text>Pessoas</Text>
-            </Button>
-            <Button onPress={() => props.navigation.goBack()}>
-              <Text>Chamadas</Text>
-            </Button>
-            <Button>
-              <Text>Relatórios</Text>
-            </Button>
-          </FooterTab>
-        </Footer>
-      </Container>
+      <ListItem>
+        <Left>
+          <Text>
+            <Icon name="airplane" />
+          </Text>
+        </Left>
+        <Body>
+          <Text>{person.name}</Text>
+        </Body>
+      </ListItem>
     );
+  };
+
+  const info = persons ? 'Quantidade de Dogs: ' + persons.length : 'Carregando';
+  return (
+    <Container>
+      <Header>
+        <Body>
+          <Title>PontoApp IBCL</Title>
+        </Body>
+        <Right />
+      </Header>
+      <Content>
+        <View
+          style={{
+            backgroundColor: '#ccc',
+            display: 'flex',
+            alignItems: 'center',
+            flex: 1,
+          }}>
+          <Container
+            style={{
+              backgroundColor: '#fff',
+              flex: 1,
+              width: '100%',
+            }}>
+            <List dataArray={persons} renderRow={renderPersonItem} />
+          </Container>
+        </View>
+      </Content>
+      <Footer>
+        <FooterTab>
+          <Button active>
+            <Text>Pessoas</Text>
+          </Button>
+          <Button onPress={() => props.navigation.goBack()}>
+            <Text>Chamadas</Text>
+          </Button>
+          <Button>
+            <Text>Relatórios</Text>
+          </Button>
+        </FooterTab>
+      </Footer>
+      <Fab onPress={() => handleAddPerson()}>
+        <Icon name="add" />
+      </Fab>
+    </Container>
+  );
 };
 export default PersonPage;

@@ -106,6 +106,9 @@ const PersonPage = props => {
           </Container>
         </View>
       </Content>
+      <Fab onPress={() => handleAddPerson()} style={{marginBottom: 50}}>
+        <Icon name="add" />
+      </Fab>
       <Footer>
         <FooterTab>
           <Button active>
@@ -119,9 +122,6 @@ const PersonPage = props => {
           </Button>
         </FooterTab>
       </Footer>
-      <Fab onPress={() => handleAddPerson()}>
-        <Icon name="add" />
-      </Fab>
     </Container>
   );
 };

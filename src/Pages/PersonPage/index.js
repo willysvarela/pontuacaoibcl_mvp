@@ -27,41 +27,28 @@ import {
   Icon,
 } from 'native-base';
 import {View} from 'react-native';
-import PersonSchema from '../../schemas/PersonSchema';
-import {FlatList} from 'react-native-gesture-handler';
-
-const Realm = require('realm');
+//import getRealm from '../../config/realm';
+import personController from '../../controllers/personController';
 
 const PersonPage = props => {
   const [persons, setPersons] = useState([]);
 
   useEffect(() => {
     async function loadPersons() {
-      const realm = await getRealm();
-      const data = realm.objects('Person');
-      setPersons(data);
+      const res = await personController.readPersons();
+      setPersons(res);
     }
     loadPersons();
   }, []);
 
-  const getRealm = () => {
+  /*  const getRealm = () => {
     return Realm.open({
       schema: [PersonSchema],
     });
-  };
-
-  const savePerson = async person => {
-    const realm = await getRealm();
-
-    realm.write(() => {
-      realm.create('Person', person, 'modified');
-    });
-    const data = realm.objects('Person');
-    setPersons(data);
-  };
+  };*/
 
   async function handleAddPerson() {
-    await savePerson({id: 4, name: 'Willys'});
+    await personController.savePerson({id: 4, name: 'Willys'});
   }
 
   const renderPersonItem = person => {
@@ -102,7 +89,11 @@ const PersonPage = props => {
               flex: 1,
               width: '100%',
             }}>
-            <List dataArray={persons} renderRow={renderPersonItem} />
+            <List
+              dataArray={persons ? persons : []}
+              renderRow={renderPersonItem}
+              keyExtractor={(person, id) => String(id)}
+            />
           </Container>
         </View>
       </Content>

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
+import React, { useState } from 'react';
+import { View } from 'react-native';
 import {
   Container,
   Content,
@@ -12,18 +12,23 @@ import {
   Input,
   Label,
   Button,
+  Icon,
 } from 'native-base';
-import getRealm from '../config/realm';
+import getRealm from '../../config/realm';
 
 const AddPersonPage = props => {
   const [name, setName] = useState('initialState');
 
-  const handleAddPerson = () => {};
-  const handleKeyPress = e => {};
+  const handleAddPerson = () => { };
+  const handleKeyPress = e => { };
   return (
     <Container>
       <Header transparent>
-        <Left />
+        <Left>
+          <Button onPress={() => props.navigation.goBack()}>
+            <Icon name="back" />
+          </Button>
+        </Left>
         <Body>
           <Text>Adicionar Pessoa</Text>
         </Body>

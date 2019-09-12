@@ -13,8 +13,8 @@
     "react-native": "0.60.5",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-reanimated": "^1.2.0",
-    "react-native-screens": "^2.0.0-alpha.3",
-    "react-navigation": "^4.0.3",
+    "react-native-screens": "latest",
+    "react-navigation": "^4.0.4",
     "react-navigation-stack": "^1.5.5",
     "realm": "^2.29.2"
   },

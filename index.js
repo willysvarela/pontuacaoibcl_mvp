@@ -2,8 +2,17 @@
  * @format
  */
 
-import {AppRegistry} from 'react-native';
+import {AppRegistry, View, Text} from 'react-native';
+import React from 'react';
 import {name as appName} from './app.json';
 import Routes from './src/Routes';
 
-AppRegistry.registerComponent(appName, () => Routes);
+const App = () => {
+  return (
+    <View>
+      <Text>OI</Text>
+    </View>
+  );
+};
+
+AppRegistry.registerComponent(appName, () => App);

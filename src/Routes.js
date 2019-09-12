@@ -8,11 +8,9 @@ const Routes = createAppContainer(
   createStackNavigator(
     {
       Home: MainPage,
-      Person: PersonPage,
-      AddPerson: AddPersonPage,
     },
     {
-      initialRouteName: 'Person',
+      initialRouteName: 'Home',
       defaultNavigationOptions: {
         header: null,
       },

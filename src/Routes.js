@@ -9,7 +9,7 @@ const Routes = createAppContainer(
     {
       Home: MainPage,
       Person: PersonPage,
-      AddPerson: AddPersonPage,
+      AddPerson: AddPersonPage, 
     },
     {
       initialRouteName: 'Person',

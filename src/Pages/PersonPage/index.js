@@ -7,7 +7,7 @@
  * @flow
  */
 
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import commonColor from 'native-base/src/theme/variables/commonColor';
 import {
   Container,
@@ -26,7 +26,7 @@ import {
   Fab,
   Icon,
 } from 'native-base';
-import {View} from 'react-native';
+import { View } from 'react-native';
 //import getRealm from '../../config/realm';
 import personController from '../../controllers/personController';
 
@@ -47,8 +47,9 @@ const PersonPage = props => {
     });
   };*/
 
-  async function handleAddPerson() {
-    await personController.savePerson({id: 4, name: 'Willys'});
+  async function handlePressAddPerson() {
+    props.navigation.navigate('AddPerson');
+    //await personController.savePerson({id: 4, name: 'Willys'});
   }
 
   const renderPersonItem = person => {
@@ -97,7 +98,7 @@ const PersonPage = props => {
           </Container>
         </View>
       </Content>
-      <Fab onPress={() => handleAddPerson()} style={{marginBottom: 50}}>
+      <Fab onPress={() => handlePressAddPerson()} style={{ marginBottom: 50 }}>
         <Icon name="add" />
       </Fab>
       <Footer>

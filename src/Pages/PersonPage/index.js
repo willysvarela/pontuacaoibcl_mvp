@@ -91,16 +91,16 @@ const PersonPage = props => {
             <Text>{persons.length}</Text>
             <FlatList
               data={persons}
-              renderItem={person => <Text>w{person.name}</Text>}
+              renderItem={({item: person}) => <Text>w{person.name}</Text>}
             />
+            <Button onPress={() => loadPersons()}>
+              <Text>Atualizar</Text>
+            </Button>
           </Container>
         </View>
       </Content>
       <Fab onPress={() => handlePressAddPerson()} style={{marginBottom: 50}}>
         <Icon name="add" />
-      </Fab>
-      <Fab onPress={() => loadPersons()} style={{marginBottom: 50}}>
-        <Icon name="update" />
       </Fab>
       <Footer>
         <FooterTab>

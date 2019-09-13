@@ -25,14 +25,14 @@ import {
   Fab,
   Icon,
 } from 'native-base';
-import {View} from 'react-native';
+import {View, FlatList} from 'react-native';
 import personController from '../../controllers/personController';
 
 const PersonPage = props => {
   const [persons, setPersons] = useState([]);
 
   useEffect(() => {
-    //loadPersons();
+    loadPersons();
   }, []);
 
   async function loadPersons() {
@@ -87,12 +87,20 @@ const PersonPage = props => {
               backgroundColor: '#fff',
               flex: 1,
               width: '100%',
-            }}
-          />
+            }}>
+            <Text>{persons.length}</Text>
+            <FlatList
+              data={persons}
+              renderItem={person => <Text>w{person.name}</Text>}
+            />
+          </Container>
         </View>
       </Content>
       <Fab onPress={() => handlePressAddPerson()} style={{marginBottom: 50}}>
         <Icon name="add" />
+      </Fab>
+      <Fab onPress={() => loadPersons()} style={{marginBottom: 50}}>
+        <Icon name="update" />
       </Fab>
       <Footer>
         <FooterTab>

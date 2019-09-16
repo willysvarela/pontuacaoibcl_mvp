@@ -14,4 +14,4 @@ const App = () => {
   );
 };
 
-AppRegistry.registerComponent(appName, () => Routes);
+AppRegistry.registerComponent(appName, () => App);

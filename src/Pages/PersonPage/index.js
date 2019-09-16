@@ -15,13 +15,10 @@ import {
   Content,
   Footer,
   FooterTab,
-  Left,
   Right,
   Body,
   Button,
   Text,
-  List,
-  ListItem,
   Fab,
   Icon,
 } from 'native-base';
@@ -31,39 +28,14 @@ import personController from '../../controllers/personController';
 const PersonPage = props => {
   const [persons, setPersons] = useState([]);
 
-  useEffect(() => {
-    loadPersons();
-  }, []);
-
   async function loadPersons() {
     const res = await personController.readPersons();
-    setPersons(res);
+    return res;
   }
-  /*  const getRealm = () => {
-    return Realm.open({
-      schema: [PersonSchema],
-    });
-  };*/
 
   async function handlePressAddPerson() {
     props.navigation.navigate('AddPerson');
-    //await personController.savePerson({id: 4, name: 'Willys'});
   }
-
-  const renderPersonItem = person => {
-    return (
-      <ListItem>
-        <Left>
-          <Text>
-            <Icon name="airplane" />
-          </Text>
-        </Left>
-        <Body>
-          <Text>{person.name}</Text>
-        </Body>
-      </ListItem>
-    );
-  };
 
   const info = persons ? 'Quantidade de Dogs: ' + persons.length : 'Carregando';
   return (
@@ -80,18 +52,16 @@ const PersonPage = props => {
             backgroundColor: '#ccc',
             display: 'flex',
             alignItems: 'center',
-            flex: 1,
           }}>
           <Container
             style={{
               backgroundColor: '#fff',
-              flex: 1,
               width: '100%',
             }}>
             <Text>{persons.length}</Text>
             <FlatList
               data={persons}
-              renderItem={({item: person}) => <Text>w{person.name}</Text>}
+              renderItem={({item: person}) => <Text>{person.name}</Text>}
             />
             <Button onPress={() => loadPersons()}>
               <Text>Atualizar</Text>

@@ -5,7 +5,7 @@ const personController = {
     const realm = await getRealm();
 
     realm.write(() => {
-      realm.create('Person', person, 'modified');
+      realm.create('Person', person);
     });
     const data = realm.objects('Person');
     return data;

@@ -37,7 +37,7 @@ const PersonPage = props => {
     props.navigation.navigate('AddPerson');
   }
 
-  const info = persons ? 'Quantidade de Dogs: ' + persons.length : 'Carregando';
+  //const info = persons ? 'Quantidade de Dogs: ' + persons.length : 'Carregando';
   return (
     <Container>
       <Header>
@@ -58,11 +58,6 @@ const PersonPage = props => {
               backgroundColor: '#fff',
               width: '100%',
             }}>
-            <Text>{persons.length}</Text>
-            <FlatList
-              data={persons}
-              renderItem={({item: person}) => <Text>{person.name}</Text>}
-            />
             <Button onPress={() => loadPersons()}>
               <Text>Atualizar</Text>
             </Button>

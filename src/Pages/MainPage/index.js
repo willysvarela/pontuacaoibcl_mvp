@@ -8,10 +8,8 @@ const MainPage = props => {
           <Text>Main Page</Text>
         </Body>
       </Header>
-      <Content>
-        <Button onPress={() => props.navigation.navigate('Person')}>
-          <Text>Go to Person Page</Text>
-        </Button>
+      <Content style={{backgroundColor: '#000'}}>
+        <Text>Oe</Text>
       </Content>
     </Container>
   );

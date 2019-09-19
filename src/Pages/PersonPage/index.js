@@ -8,7 +8,6 @@
  */
 
 import React, {useState, useEffect} from 'react';
-import commonColor from 'native-base/src/theme/variables/commonColor';
 import {
   Container,
   Header,
@@ -16,57 +15,29 @@ import {
   Content,
   Footer,
   FooterTab,
-  Left,
   Right,
   Body,
   Button,
   Text,
-  List,
-  ListItem,
   Fab,
   Icon,
 } from 'native-base';
-import {View} from 'react-native';
-//import getRealm from '../../config/realm';
+import {View, FlatList} from 'react-native';
 import personController from '../../controllers/personController';
 
 const PersonPage = props => {
   const [persons, setPersons] = useState([]);
 
-  useEffect(() => {
-    async function loadPersons() {
-      const res = await personController.readPersons();
-      setPersons(res);
-    }
-    loadPersons();
-  }, []);
-
-  /*  const getRealm = () => {
-    return Realm.open({
-      schema: [PersonSchema],
-    });
-  };*/
-
-  async function handleAddPerson() {
-    await personController.savePerson({id: 4, name: 'Willys'});
+  async function loadPersons() {
+    const res = await personController.readPersons();
+    return res;
   }
 
-  const renderPersonItem = person => {
-    return (
-      <ListItem>
-        <Left>
-          <Text>
-            <Icon name="airplane" />
-          </Text>
-        </Left>
-        <Body>
-          <Text>{person.name}</Text>
-        </Body>
-      </ListItem>
-    );
-  };
+  async function handlePressAddPerson() {
+    props.navigation.navigate('AddPerson');
+  }
 
-  const info = persons ? 'Quantidade de Dogs: ' + persons.length : 'Carregando';
+  //const info = persons ? 'Quantidade de Dogs: ' + persons.length : 'Carregando';
   return (
     <Container>
       <Header>
@@ -81,23 +52,19 @@ const PersonPage = props => {
             backgroundColor: '#ccc',
             display: 'flex',
             alignItems: 'center',
-            flex: 1,
           }}>
           <Container
             style={{
               backgroundColor: '#fff',
-              flex: 1,
               width: '100%',
             }}>
-            <List
-              dataArray={persons ? persons : []}
-              renderRow={renderPersonItem}
-              keyExtractor={(person, id) => String(id)}
-            />
+            <Button onPress={() => loadPersons()}>
+              <Text>Atualizar</Text>
+            </Button>
           </Container>
         </View>
       </Content>
-      <Fab onPress={() => handleAddPerson()} style={{marginBottom: 50}}>
+      <Fab onPress={() => handlePressAddPerson()} style={{marginBottom: 50}}>
         <Icon name="add" />
       </Fab>
       <Footer>

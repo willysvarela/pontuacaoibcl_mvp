@@ -1,9 +1,19 @@
 /**
  * @format
  */
-
-import {AppRegistry} from 'react-native';
-import {name as appName} from './app.json';
+import React from 'react';
+import {AppRegistry, View, Text} from 'react-native';
 import Routes from './src/Routes';
 
-AppRegistry.registerComponent(appName, () => Routes);
+const App = () => {
+  return (
+    <View>
+      <Text>Olá</Text>
+      <Text>Olá</Text>
+      <Text>Olá</Text>
+      <Text>Olá</Text>
+    </View>
+  );
+};
+
+AppRegistry.registerComponent('pontuacaoibcl_mvp', () => Routes);

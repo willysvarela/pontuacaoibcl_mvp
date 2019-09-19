@@ -12,7 +12,7 @@ Mini-Product Backlog
 
 To Do
 - [x] Iniciar Projeto
-- [ ] Criar Database (Realm Schemas)
+- [x] Criar Database (Realm Schemas)
 - [ ] Criar Controllers
 - [ ] Criar View Pessoa (CRUD)
 - [ ] Criar View de Pontos (CRUD)

@@ -19,23 +19,66 @@ import {
   Body,
   Button,
   Text,
-  Fab,
   Icon,
+  Form,
+  Item,
+  Label,
+  Input,
+  Toast,
 } from 'native-base';
-import {View, FlatList} from 'react-native';
+import {View, FlatList, StyleSheet} from 'react-native';
 import personController from '../../controllers/personController';
+import getRealm from '../../config/realm';
+const style = StyleSheet.create({
+  personItemStyle: {
+    padding: 20,
+    fontSize: 16,
+  },
+});
 
 const PersonPage = props => {
-  const [persons, setPersons] = useState([]);
+  const [persons, setPersons] = useState([{id: 1, name: 'Willys'}]);
+  const [person, setPerson] = useState({id: 0, name: ''});
 
-  async function loadPersons() {
-    const res = await personController.readPersons();
-    return res;
+  useEffect(() => {
+    async function loadPersons() {
+      const realm = await getRealm();
+      const list = realm.objects('Person');
+      //const list = await personController.readPersons();
+      setPersons(list);
+    }
+    loadPersons();
+  }, []);
+
+  const renderPersonItem = person => {
+    return (
+      <View style={style.personItemStyle}>
+        <Text>{person.name}</Text>
+      </View>
+    );
+  };
+
+  async function handleAddPerson() {
+    /*const data = await personController.savePerson({
+      id: persons.length + 10,
+      name: person.name,
+    });*/
+    const realm = await getRealm();
+    realm.write(() => {
+      realm.create(
+        'Person',
+        {
+          id: persons.length + 10,
+          name: person.name,
+        },
+        'modified',
+      );
+    });
   }
 
-  async function handlePressAddPerson() {
-    props.navigation.navigate('AddPerson');
-  }
+  const handleChangeText = e => {
+    setPerson(prevState => ({id: prevState.id, name: e}));
+  };
 
   //const info = persons ? 'Quantidade de Dogs: ' + persons.length : 'Carregando';
   return (
@@ -58,15 +101,34 @@ const PersonPage = props => {
               backgroundColor: '#fff',
               width: '100%',
             }}>
-            <Button onPress={() => loadPersons()}>
+            <View>
+              <View>
+                <Form style={{marginBottom: 10}}>
+                  <Item floatingLabel>
+                    <Label>Nome</Label>
+                    <Input
+                      placeholder=""
+                      value={person.name}
+                      onChangeText={handleChangeText}
+                    />
+                  </Item>
+                </Form>
+              </View>
+              <Button onPress={() => handleAddPerson()} block>
+                <Text>Salvar</Text>
+              </Button>
+            </View>
+            <FlatList
+              data={persons}
+              renderItem={({item}) => renderPersonItem(item)}
+              keyExtractor={item => String(item.id)}
+            />
+            <Button onPress={() => console.log('press')}>
               <Text>Atualizar</Text>
             </Button>
           </Container>
         </View>
       </Content>
-      <Fab onPress={() => handlePressAddPerson()} style={{marginBottom: 50}}>
-        <Icon name="add" />
-      </Fab>
       <Footer>
         <FooterTab>
           <Button active>
